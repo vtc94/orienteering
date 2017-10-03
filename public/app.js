@@ -194,11 +194,11 @@ firebase.initializeApp(config);
     }
 
     function navigateToDashboard(){
-      location.href = "index.html";
+      location.href = "dashboard.html";
     }
 
     function nagivateToLogin(){
-      location.href = "login.html";
+      window.open("index.html", "_self");
     }
 
     function loadAdditionalUserData(user){
