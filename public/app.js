@@ -50,7 +50,7 @@ firebase.initializeApp(config);
 
     //Handle click event for login button
 
-    if(btnLogin!=null){
+    //if(btnLogin!=null){
       btnLogin.addEventListener('click', e => {
         const email = txtLoginEmail.value;
         const password = txtLoginPassword.value;
@@ -83,7 +83,7 @@ firebase.initializeApp(config);
           }
         });
       });
-    }
+    //}
 
     //reset the error field when user input is detected
     $('#txtLoginEmail').on('input', function() {
