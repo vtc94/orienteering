@@ -194,11 +194,11 @@ firebase.initializeApp(config);
     }
 
     function navigateToDashboard(){
-      window.open("https://qrcodevtc.herokuapp.com/dashboard.html", "_self");
+      window.open("index.html", "_self");
     }
 
     function nagivateToLogin(){
-      window.open("index.html", "_self");
+      window.open("login.html", "_self");
     }
 
     function loadAdditionalUserData(user){
