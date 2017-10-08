@@ -194,11 +194,11 @@ firebase.initializeApp(config);
     }
 
     function navigateToDashboard(){
-      window.open("dashboard.html");
+      window.location.replace("dashboard.html");
     }
 
     function nagivateToLogin(){
-      window.open("index.html");
+      window.location.replace("index.html");
     }
 
     function loadAdditionalUserData(user){
