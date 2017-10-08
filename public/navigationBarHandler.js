@@ -10,7 +10,7 @@ Last Modified: 17/08/2017
 
 //admin
 const adminDashboardMenu = "<li id=\"adminDashboardMenu\" class=\"mt\">" +
-    "<a id=\"navDashboardLinkItem\" href=\"index.html\">" +
+    "<a id=\"navDashboardLinkItem\" href=\"dashboard.html\">" +
         "<i class=\"fa fa-dashboard\"></i>" +
         "<span>Dashboard</span>" +
     "</a></li>";
@@ -21,7 +21,7 @@ const adminUserManagementMenu = "<li id=\"adminUserManagementMenu\" class=\"sub-
         "<span>Users</span>" +
     "</a>" +
     "<ul class=\"sub\">" +
-        "<li id=\"navPlayersLinkItem\"><a href=\"#\">Players</a></li>" +
+        "<li id=\"navPlayersLinkItem\"><a href=\"user.html\">Players</a></li>" +
         "<li id=\"navAdminsLinkItem\"><a href=\"#\">Admins</a></li>" +
         "<li id=\"navGroupsLinkItem\"><a href=\"#\">Groups</a></li>" +
     "</ul>" +
@@ -41,7 +41,7 @@ const adminEventManagementMenu = "<li id=\"navEventManagementMenu\" class=\"sub-
 
     //player
     const playerDashboardMenu = "<li id=\"playerDashboardMenu\" class=\"mt\">" +
-        "<a id=\"navDashboardLinkItem\" href=\"index.html\">" +
+        "<a id=\"navDashboardLinkItem\" href=\"dashboard.html\">" +
             "<i class=\"fa fa-dashboard\"></i>" +
             "<span>Dashboard</span>" + "</a></li>";
 
