@@ -21,7 +21,7 @@ const adminUserManagementMenu = "<li id=\"adminUserManagementMenu\" class=\"sub-
         "<span>Users</span>" +
     "</a>" +
     "<ul class=\"sub\">" +
-        "<li id=\"navPlayersLinkItem\"><a href=\"user.html\">Players</a></li>" +
+        "<li id=\"navPlayersLinkItem\"><a href=\"users.html\">Players</a></li>" +
         "<li id=\"navAdminsLinkItem\"><a href=\"#\">Admins</a></li>" +
         "<li id=\"navGroupsLinkItem\"><a href=\"#\">Groups</a></li>" +
     "</ul>" +
