@@ -72,7 +72,7 @@ firebase.initializeApp(config);
           else if(errorCode=="auth/user-not-found"){
             $('#loginEmailDiv').addClass('has-error');
             $('#errorAlert').html(getDismissableAlertString("Invalid E-mail",
-              " - The e-mail address you entered does not belong to a user."));
+              " - The e-mail address you entered does not belong to a user fdhdhgfh."));
           }
           //invalid password for uservar message =
           else if(errorCode=="auth/wrong-password"){
