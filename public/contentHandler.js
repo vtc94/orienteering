@@ -69,7 +69,6 @@ function searchEvent(value){
 					content += '<td>';
 
 					for(var key in val.courses){
-						console.log(key);
 						if (val.courses.hasOwnProperty(key)) {
 						//if course is set to true
 							if(val.courses[key]){
