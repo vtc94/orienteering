@@ -51,7 +51,7 @@ firebase.initializeApp(config);
     //Handle click event for login button
 
     if(btnLogin!=null){
-      btnLogin.addEventListener('click', e => {
+      $(btnLogin).click(function() {
         const email = txtLoginEmail.value;
         const password = txtLoginPassword.value;
 
