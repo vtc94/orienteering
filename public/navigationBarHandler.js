@@ -1,5 +1,5 @@
 /*
-Author: Hiruna Wijesinghe
+Author: Team P
 Last Modified: 17/08/2017
 
 
@@ -56,8 +56,6 @@ const adminEventManagementMenu = "<li id=\"navEventManagementMenu\" class=\"sub-
             "<li id=\"navResultsLinkItem\"><a href=\"results.html\">Results</a></li>" +
         "</ul></li>";
 
-
-console.log(localStorage.getItem("isAdmin"));
 if(localStorage.getItem("isAdmin")=="true"){
   showAdminNavBar();
 }
@@ -126,20 +124,3 @@ function resetNavBarActiveItems(){
   $("#navResultsLinkItem").removeClass("active");
 }
 
-
-/*
-
-
-
-
-
-
-*/
-
-// function reloadNavVariables(){
-//   adminDashboardMenu = document.getElementById('adminDashboardMenu');
-//   playerDashboardMenu = document.getElementById('playerDashboardMenu');
-//   adminUserManagementMenu = document.getElementById('adminUserManagementMenu');
-//   adminEventManagementMenu = document.getElementById('adminEventManagementMenu');
-//   playerEventManagementMenu = document.getElementById('playerEventManagementMenu');
-// }

@@ -50,10 +50,17 @@ var h = 0;
 var m = 0;
 var s = 0;
 function startTime() {
+	var newTime = new Date().getTime();
+	var courseID  = localStorage.getItem("courseID");
+	var subtract = newTime - localStorage.getItem(courseID);
+	h = Math.floor(subtract%(1000*60*60*24)/(1000*60*60));
+	m = Math.floor(subtract%(1000*60*60)/(1000*60));
+	s = Math.floor(subtract%(1000*60)/(1000));
+
  	start = setTimeout(startTime, 1000);
-    s = checkTime(s);
-	//m = checkTime(m);
-    //h = checkTime(h);
+    
+	s = checkTime(s);
+	
 	if(m<10 && h <10){
 		document.getElementById('txt').innerHTML =
 						"0" + h + ":" + "0" + m + ":" + s;
@@ -76,6 +83,20 @@ function startTime() {
     	m=0;
         h++;
     }
+	var courseID = localStorage.getItem("courseID");
+	var courseType, timeAllocate;
+	dtb.ref('courses/'+courseID).on('value',function(res){
+		course = res.val();
+		courseType = course.type;
+		if(courseType == "score"){
+			timeAllocate = course.timeAllocated * 60000;
+			var overtime = subtract - timeAllocate;
+			if(subtract != timeAllocate && overtime%60000 == 0){
+				total -= 3;
+				dtb.ref('results/'+ resultId + '/points').set(total);
+			}
+		}
+	});
 }
 
 function checkTime(i) {
@@ -93,20 +114,25 @@ var sM = 0;
 var sS = 0;
 var val= document.getElementById("show").innerHTML;
 var i = 1;
+
+var ctrlIds = {};
 function scanTime(){
 	validateCode(value);
 	var value = document.getElementById("show").innerHTML;
+	
 	if(val != value ){
 		var find = validateCode(value);
 		//console.log(value);
 		if(find == "not found"){
 			alert("QR code is not valid!");
+		} else if(ctrlIds[find]){
+			alert("You have scanned this control point already!");
 		} else{
 			var courseID = localStorage.getItem("courseID");
 			var id = "'"+ courseID+"'";
 			var courseType;
 			dtb.ref('courses/'+courseID).child('type').on('value',function(res){
-				courseType = 'score';//res.val();
+				courseType = res.val().toLowerCase();
 				//console.log(courseType);
 			
 				if(courseType == "line"){
@@ -119,6 +145,8 @@ function scanTime(){
 			});
 			console.log(courseType);
 		}
+		ctrlIds[find] = true;
+		console.log(courseType);
 	}
 	val = value;
 	scan = setTimeout(scanTime, 1000);
@@ -144,6 +172,7 @@ function validateCode(code){
 	});
 	return find;
 }
+
 var oldCtr = 0;
 function line(courseID, ctrId, code){
 	console.log(ctrId);

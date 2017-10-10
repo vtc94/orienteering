@@ -92,7 +92,7 @@
 
 
 <!------------->
-
+<input type="text" id="courseSearch" onkeyup="searchCourse(this.value)" name="courseSearch" width=100px placeholder="Search by name" style="float:right;margin-top:25px;"/>
 <h3><i class="fa fa-angle-right"></i> Courses</h3>
 <div class="row mt">
 <div class="col-lg-12">
@@ -153,15 +153,21 @@
       <div class="modal-body">
         <div class="create-form">
             <input id="txtName" type="text" class="form-control create" placeholder="Name"><br>
-            <div class="form-group">
+            
+			<div class="form-group">
 				<select class="form-control create" id="type" onchange="showSubType()">
 					<option>Line</option>
 					<option>Scatter</option>
 					<option>Score</option>
 				</select>
-				<select id="subType" class="form-control create" style="display:none; width:50%; float:right; margin-bottom:20px;">
+				<select id="subType" class="form-control create" style="display:none; width:40%; float:left; margin-bottom:20px;">
 					<option>Walking</option>
 					<option>Running</option>
+				</select>
+				
+				<select id="timeAllocate" class="form-control create" style="display:none; width:40%; float:right; margin-bottom:20px;">
+					<option>45</option>
+					<option>60</option>
 				</select>
 			</div>
 
@@ -200,15 +206,21 @@
       <div class="modal-body">
         <div class="create-form">
             <input id="txtName" type="text" class="form-control edit" placeholder="Name"><br>
-            <div class="form-group">
+            
+			<div class="form-group">
 				<select class="form-control edit" id="type" onchange="showSubType()">
 					<option>Line</option>
 					<option>Scatter</option>
 					<option>Score</option>
 				</select>
-				<select id="subtype" class="form-control edit" style="display:none; width:50%; float:right; margin-bottom:20px;">
+				<select id="subtype" class="form-control edit" style="display:none; width:40%; float:left; margin-bottom:20px;">
 					<option>Walking</option>
 					<option>Running</option>
+				</select>
+				
+				<select id="timeallocate" class="form-control edit" style="display:none; width:40%; float:right; margin-bottom:20px;">
+					<option>45</option>
+					<option>60</option>
 				</select>
 			</div>
 
@@ -228,7 +240,7 @@
 		</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetCInput()">Close</button>
         <button id="btnCreate" class="btn btn-theme" onclick="editCourses()" data-dismiss="modal"> Update</button>
       </div>
     </div>

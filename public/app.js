@@ -1,6 +1,6 @@
 /*
 
-Author: Hiruna wijesinghe
+Author: Team P
 Last Modified: 17/08/2017
 
 */
@@ -17,15 +17,11 @@ var config = {
   };
 firebase.initializeApp(config);
 
-
-
   //database referece
   const database = firebase.database();
 
-
   //store signed in user
   var currentUser = null;
-
 
     //sign up form
 
@@ -51,18 +47,16 @@ firebase.initializeApp(config);
     //Handle click event for login button
 
     if(btnLogin!=null){
-      $(btnLogin).click(function() {
+      btnLogin.addEventListener('click', e => {
         const email = txtLoginEmail.value;
         const password = txtLoginPassword.value;
 
-        firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
-            document.location = "dashboard.html";
-        })
+        firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
           var errorMessage = error.message;
-          //console.log(errorCode + " : " + errorMessage);
+		  
           //invalid email format
           if(errorCode=="auth/invalid-email"){
             $('#loginEmailDiv').addClass('has-error');
@@ -74,15 +68,14 @@ firebase.initializeApp(config);
           else if(errorCode=="auth/user-not-found"){
             $('#loginEmailDiv').addClass('has-error');
             $('#errorAlert').html(getDismissableAlertString("Invalid E-mail",
-              " - The e-mail address you entered does not belong to a user fdhdhgfh."));
+              " - The e-mail address you entered does not belong to a user."));
           }
           //invalid password for uservar message =
           else if(errorCode=="auth/wrong-password"){
             $('#loginPasswordDiv').addClass('has-error');
             $('#errorAlert').html(getDismissableAlertString("Invalid Password",
               " - The password you entered is incorrect."));
-
-          } 
+          }
         });
       });
     }
@@ -92,8 +85,8 @@ firebase.initializeApp(config);
         $('#loginEmailDiv').removeClass('has-error');
         $('#loginPasswordDiv').removeClass('has-error');
         $('#errorAlert').html("");
-
     });
+	
     $('#txtLoginPassword').on('input', function() {
         $('#loginEmailDiv').removeClass('has-error');
         $('#loginPasswordDiv').removeClass('has-error');
@@ -111,7 +104,6 @@ firebase.initializeApp(config);
         const lastName = txtLastName.value;
         const phone = txtPhone.value;
         const dob = txtDob.value;
-
 
         if(isSignUpDataValid()){
           //create new user
@@ -140,67 +132,55 @@ firebase.initializeApp(config);
 
     //Handle on click event for logout button
     if(btnLogOut!=null){
-      btnLogOut.addEventListener('click', e => {
-        firebase.auth().signOut().then(function() {
-          // Sign-out successful.
-          console.log("signOut");
-          nagivateToLogin();
-          localStorage.clear();
-        }).catch(function(error) {
-          // An error happened.
-        });
+      btnLogOut.addEventListener('click', e => {	
+		localStorage.clear();		
+		nagivateToLogin();       
       });
     }
 
-
     //realtime auth state listener
-
-    firebase.auth().onAuthStateChanged(user =>{
+    var log = firebase.auth().onAuthStateChanged(user =>{
       if(user){
-        console.log(user);
         currentUser = user;
         //store current user in localStorage
         localStorage.setItem("currentUser", JSON.stringify(user));
-        console.log(currentUser);
         loadAdditionalUserData(user);
         checkAdminStatus(user);
       }
       else{
         currentUser = null;
         if(!(($('body').is('.loginPage')) || ($('body').is('.signUpPage')))){
-          alert("You must be logged in to access this page");
+          //alert("You must be logged in to access this page");
           nagivateToLogin();
         }
-        console.log("not logged in");
       }
     });
-
 
     //check if user is admin
     function checkAdminStatus(user){
       firebase.database().ref('/admins/').once('value').then(function(snapshot) {
         //user is admin
         if(snapshot.child(user.uid).val()=="true"){
-          console.log("goes here first");
           localStorage.setItem("isAdmin", "true");
         }
-        else{ //user is not an admin
-          //navigate to player dashboard
+		//user is not an admin
+        //navigate to player dashboard
+        else{ 
           localStorage.setItem("isAdmin", "false");
         }
       });
-      //navigae to admin dashboard
+      //navigate to admin dashboard
       if(($('body').is('.loginPage')) || ($('body').is('.signUpPage'))){
         navigateToDashboard();
       }
     }
 
     function navigateToDashboard(){
-      window.location = "dashboard.html";
+      location.href = "dashboard.html";
     }
 
     function nagivateToLogin(){
-      window.location = "index.html";
+      location.href = "index.html";
     }
 
     function loadAdditionalUserData(user){
@@ -228,8 +208,6 @@ firebase.initializeApp(config);
     }
 
     //check fields for sign up page
-
-
     function isSignUpDataValid(){
       if(txtEmail.value.trim().length==0 ||
         txtPassword.value.trim().length==0 ||
@@ -253,12 +231,12 @@ firebase.initializeApp(config);
             " - The entered phone number is invalid."));
             return false;
         }
-        else if(Date.parse(txtDob.value)-Date.parse(new Date())>0){ //check if dob is older than at least 5 years)
+		
+		//check if dob is older than at least 5 years)
+        else if(Date.parse(txtDob.value)-Date.parse(new Date())>0){ 
             $('#errorAlert').html(getDismissableAlertString("Error",
               " - Date of birth can not be in the future"));
               return false;
         }
         return true;
       }
-
-  ///https://stackoverflow.com/questions/39083242/firebase-web-retrieve-data
