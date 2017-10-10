@@ -81,6 +81,7 @@ firebase.initializeApp(config);
               " - The password you entered is incorrect."));
 
           }
+            else{navigateToDashboard();}
         });
       });
     }
