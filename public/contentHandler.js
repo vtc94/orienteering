@@ -43,11 +43,11 @@ var tableAdminUsersBody;
 document.getElementById("userName").innerHTML =
   additionalUserData.firstName + " " + additionalUserData.lastName;
 
-
 //event handling
 function searchEvent(value){
+	coursesRef.child("course").once('value').then(function(){
 	eventsRef.on('value', function(snapshot){
-	//if user is admin
+		//if user is admin
 		if(snapshot.exists()){
 			var content = '';
 			content +='<thead>';
@@ -67,11 +67,12 @@ function searchEvent(value){
 					content +='<tr>';
 					content += '<td>' + val.name + '</td>';
 					content += '<td>';
-				
+
 					for(var key in val.courses){
+						console.log(key);
 						if (val.courses.hasOwnProperty(key)) {
 						//if course is set to true
-							if(val.courses[key]==true){
+							if(val.courses[key]){
 								findCourseByKey(key);
 								var tempCourseName = localStorage.getItem('tempCourseName');
 								content+= tempCourseName + ", ";
@@ -79,22 +80,24 @@ function searchEvent(value){
 							}
 						}
 					}
+					//remoeventsRef.on('value', function(snapshot){eventsRef.on('value', function(snapshot){ve the last comma from courses list
+					if(haveCourses){
+						content = content.substring(0, content.length-2);
+					}
+					//content+="</td>";
+					if(localStorage.getItem("isAdmin")=="true"){
+						var eventID = "'"+data.key+"'";
+						content += '</td><td><button type=\"button\" class=\"btn btn-theme02\" data-toggle="modal" onclick="loadCoursesEdit(); getCurrentEvent('+eventID+')" data-target="#editModal">Edit</button>';
+						//console.log(eventID);
+					}
+					content += '</td>' + '</tr>';
 				}
-				//remoeventsRef.on('value', function(snapshot){eventsRef.on('value', function(snapshot){ve the last comma from courses list
-				if(haveCourses){
-					content = content.substring(0, content.length-2);
-				}
-				content+="</td>";
-				if(localStorage.getItem("isAdmin")=="true"){
-					var eventID = "'"+data.key+"'";
-					content += '<td><button type=\"button\" class=\"btn btn-theme02\" data-toggle="modal" onclick="loadCoursesEdit(); getCurrentEvent('+eventID+')" data-target="#editModal">Edit</button>';
-					//console.log(eventID);
-				}
-				content += '</td>' + '</tr>';
 			});
 			content +='</tbody>';
+			retrive = false;
 			$('#tableEvents').html(content);
 		}
+	});
 	});
 }
 var eventSearchKey = "";
@@ -103,9 +106,11 @@ searchEvent(eventSearchKey);
 function findCourseByKey(cKey){
   if(cKey!=undefined){
     coursesRef.child(cKey).once('value', function(snapshot){
+		//console.log(snapshot.val());
       if(snapshot.exists()){
         localStorage.removeItem('tempCourseName');
-        localStorage.setItem('tempCourseName',snapshot.val().name);
+        localStorage.setItem('tempCourseName',snapshot.val().name);	
+		retrive = true;
       }
     });
   }
@@ -167,7 +172,10 @@ function getAverageTotalTimeInMins(totalTime){
 }
 
 //event handling
-resultsRef.on('value', function(snapshot){
+usersRef.child("users").once('value').then(function(){
+	coursesRef.child("courses").once('value');
+}).then(function(){
+	resultsRef.on('value', function(snapshot){
   //if user is admin
   //if(localStorage.getItem("isAdmin")=="true"){
     if(snapshot.exists()){
@@ -271,6 +279,7 @@ resultsRef.on('value', function(snapshot){
 
 
   }
+});
 });
 
 //courses handling
