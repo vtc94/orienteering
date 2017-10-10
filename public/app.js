@@ -55,7 +55,9 @@ firebase.initializeApp(config);
         const email = txtLoginEmail.value;
         const password = txtLoginPassword.value;
 
-        firebase.auth().signInWithEmailAndPassword(email, password)
+        firebase.auth().signInWithEmailAndPassword(email, password).then(function(){
+            document.location = "dashboard.html";
+        })
         .catch(function(error) {
           // Handle Errors here.
           var errorCode = error.code;
@@ -80,8 +82,7 @@ firebase.initializeApp(config);
             $('#errorAlert').html(getDismissableAlertString("Invalid Password",
               " - The password you entered is incorrect."));
 
-          }
-            else{document.location = "dashboard.html";}
+          } 
         });
       });
     }
