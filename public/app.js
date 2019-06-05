@@ -5,9 +5,20 @@ Last Modified: 17/08/2017
 
 */
 
+var firebaseConfig = {
+    apiKey: "AIzaSyB_RdmObV9iQp1xF9UeA_XqAyiS4SXZ9LE",
+    authDomain: "trial-d940f.firebaseapp.com",
+    databaseURL: "https://trial-d940f.firebaseio.com",
+    projectId: "trial-d940f",
+    storageBucket: "trial-d940f.appspot.com",
+    messagingSenderId: "416732198099",
+    appId: "1:416732198099:web:f4f77eed2eb31b08"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 
 // Initialize Firebase
-var config = {
+/*var config = {
     apiKey: "AIzaSyCcb3bzfYhoZyytxk69dLXdGf8FD-IqVic",
     authDomain: "orienteering-a0c63.firebaseapp.com",
     databaseURL: "https://orienteering-a0c63.firebaseio.com",
@@ -15,7 +26,7 @@ var config = {
     storageBucket: "orienteering-a0c63.appspot.com",
     messagingSenderId: "570574227287"
   };
-firebase.initializeApp(config);
+firebase.initializeApp(config);*/
 
   //database referece
   const database = firebase.database();
